@@ -1,9 +1,5 @@
 import {Zip} from './ZipModel';
 
-function processZip(zipData){
-
-}
-
 export function processListings(rawListings){
 
   let listingZips = {};

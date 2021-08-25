@@ -1,4 +1,4 @@
-import { testData } from '../../testData';
+import { apiResults } from '../testData/apiResults';
 
 export class Zip{
   constructor(zipListings){
