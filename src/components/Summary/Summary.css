@@ -1,0 +1,29 @@
+.Summary{
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 25rem;
+}
+
+.SummaryRow{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  border-bottom: 0.1rem solid gray;
+}
+
+.SummaryCell{
+  padding: 0.25rem 1rem;
+}
+.SummaryCell .num{
+  color: var(--med-accent);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.codeHeader{
+  font-size: 2rem;
+  color: var(--med-accent);
+  font-weight: 900;
+}

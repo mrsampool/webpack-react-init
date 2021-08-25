@@ -1,3 +1,9 @@
-body {
-  background: blue;
+html, body, #app{
+  background-color: #66CDAA;
+  --primary: #66CDAA;
+  --med-accent: #E6AF2E;
+}
+body{
+  font-family: 'Roboto', sans-serif;
+  padding: 1rem;
 }
