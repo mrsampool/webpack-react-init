@@ -8,19 +8,36 @@ import ReactDOM from 'react-dom';
 import {act} from 'react-dom/test-utils';
 
 // Components
-import {App} from './App';
+import {Summary} from "./Summary";
 
 // Utilities
-import {expectElementById} from "../utilities/testUtilities";
+import {expectElementsByClassName} from "../../utilities/testUtilities";
+
 
 // Set Up / Tear Down
 let container;
 beforeEach(() => {
+  let testZip = {
+    code: '80027',
+    amount: 23,
+    prices: {
+      avg: 400000,
+      mdn: 450000
+    },
+    sizes: {
+      avg: 1200,
+      mdn: 1700
+    },
+    costs: {
+      avg: 333,
+      mdn: 375
+    }
+  }
   container = document.createElement("div");
   document.body.appendChild(container);
   act(() => {
     ReactDOM.render(
-      <App/>,
+      <Summary zip={testZip}/>,
       container
     );
   });
@@ -34,55 +51,43 @@ afterEach(() => {
   }
 });
 
-describe("App", () => {
-  it('renders without crashing', () => {});
-  it('returns a UserInput component', () => {
-    expectElementById('userInput');
-  });
-  it('returns a Results component', () => {
-    expectElementById('results');
-  });
-});
-
-
-
-describe("Overview component", () => {
+describe("Summary component", () => {
   it('renders without crashing', () => {});
 
   // PRICE //
   // Avg
   it('displays an average price', () => {
-    expectElementById('avgPrice');
+    expectElementsByClassName('avgPrice');
   });
   it('average price is correct', () => {});
   // Mdn
   it('displays a median price', () => {
-    expectElementById('mdnPrice');
+    expectElementsByClassName('mdnPrice');
   });
   it('median price is correct', () => {});
 
   // SIZE //
   // Avg
   it('displays an average size', () => {
-    expectElementById('avgSize');
+    expectElementsByClassName('avgSize');
   });
   it('average size is correct', () => {
   });
   // Mdn
   it('displays a median size', () => {
-    expectElementById('mdnSize');
+    expectElementsByClassName('mdnSize');
   });
   it('median size is correct', () => {});
 
   // COST //
   // Avg
   it('displays an average cost', () => {
-    expectElementById('avgCost');
+    expectElementsByClassName('avgCost');
   });
   it('average cost is correct', () => {});
   //Mdn
   it('displays a median cost', () => {
-    expectElementById('mdnCost');
+    expectElementsByClassName('mdnCost');
   });
   it('median cost is correct', () => {});
 });

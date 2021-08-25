@@ -1,7 +1,7 @@
 import React from 'react';
 import { testData } from '../../testData';
 import { processListings } from '../utilities/processListings';
-import './App.css';
+//import './App.css';
 import { Summary } from '../components/Summary/Summary';
 
 export const App = () => {

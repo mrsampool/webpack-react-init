@@ -2,7 +2,7 @@
 import React from 'react';
 
 //Stylesheet
-import './Summary.css';
+//import './Summary.css';
 
 export const Summary = (props) =>{
   let {code, amount, prices, sizes, costs} = props.zip;
@@ -48,7 +48,7 @@ export const SummaryCell = (props) => {
         return ' ft²';
       } else if (header === 'Cost'){
         return ' /ft²'
-      };
+      }
     }();
 
     if (header === 'Price'){
@@ -61,7 +61,7 @@ export const SummaryCell = (props) => {
   let {header, type, nums} = props;
   let num = nums[type];
   return(
-    <span className="SummaryCell d-flex flex-column align-items-center">
+    <span className={`${type}${header} SummaryCell d-flex flex-column align-items-center`}>
       <span className='head'>{formatHead(type, header)}</span>
       <span className='num'>{formatNum(num, header)}</span>
     </span>
