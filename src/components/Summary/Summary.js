@@ -1,5 +1,7 @@
 //React
 import React from 'react';
+
+//Utilities
 import {formatHead, formatNum } from "../../utilities/dataUtilities";
 
 //Stylesheet
@@ -8,14 +10,14 @@ import {formatHead, formatNum } from "../../utilities/dataUtilities";
 export const Summary = (props) =>{
   let {code, amount, prices, sizes, costs} = props.zip;
   return(
-    <div className='Summary d-flex flex-column justify-content-around' key={`zipSummary${code}`}>
+    <div className='Summary d-flex flex-column justify-content-around'>
       <div className='d-flex justify-content-between'>
         <span className='codeHeader'>{code}</span>
         <span> {amount} Listing{amount > 1 ? 's' : ''}</span>
       </div>
-      <SummaryRow header='Price' nums={prices} />
-      <SummaryRow header='Size' nums={sizes} />
-      <SummaryRow header='Cost' nums={costs} />
+      <SummaryRow header='Price' nums={prices}/>
+      <SummaryRow header='Size' nums={sizes}/>
+      <SummaryRow header='Cost' nums={costs}/>
     </div>
   )
 };
