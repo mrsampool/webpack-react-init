@@ -2,6 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+// TODO: Add .SCSS preloader(?)
+
 module.exports = env => {
   return {
     plugins: [

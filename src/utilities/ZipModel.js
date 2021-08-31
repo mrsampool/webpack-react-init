@@ -36,5 +36,8 @@ function getMdn(value, listingsArr){
   return range[Math.floor(range.length / 2)][value];
 }
 function getCities(listingsArr){
-
+  // TODO: Implement City collector
+}
+function getCounties(listingsArr){
+  // TODO: Implement County collector
 }

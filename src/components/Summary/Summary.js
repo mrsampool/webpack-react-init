@@ -7,6 +7,8 @@ import {formatHead, formatNum } from "../../utilities/dataUtilities";
 //Stylesheet
 //import './Summary.css';
 
+// TODO: Implement Overview capability
+
 export const Summary = (props) =>{
   let {code, amount, prices, sizes, costs} = props.zip;
   return(
@@ -21,6 +23,8 @@ export const Summary = (props) =>{
     </div>
   )
 };
+
+
 
 export const SummaryRow = (props) => {
   let {header, nums} = props;
