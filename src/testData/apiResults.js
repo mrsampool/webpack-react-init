@@ -3,6 +3,8 @@ export const apiResultsMin = [
   // Price: 390000
   // squareFootage: 1568,
   // Zip: 80027
+  // City: Louisville
+  // County: Boulder County
   {
     bathrooms: 3,
     bedrooms: 3,
@@ -26,9 +28,12 @@ export const apiResultsMin = [
     latitude: 39.98762,
     longitude: -105.143337
   },
+
   // price: 466900,
   // squareFootage: 1133,
   // Zip: 80027
+  // City: Boulder
+  // County: Boulder County
   {
     bathrooms: 2,
     bedrooms: 2,
@@ -39,7 +44,7 @@ export const apiResultsMin = [
     propertyType: 'Condo',
     addressLine1: '1312 Snowberry Ln',
     addressLine2: 'Unit 5-201',
-    city: 'Louisville',
+    city: 'Boulder',
     state: 'CO',
     zipCode: '80027',
     formattedAddress: '1312 Snowberry Ln, Unit 5-201, Louisville, CO 80027',
@@ -53,20 +58,23 @@ export const apiResultsMin = [
     latitude: 39.991703,
     longitude: -105.126766
   },
+
   // price: 449900,
   // squareFootage: 1135,
   // Zip: 80027
+  // City: Denver
+  // County: Colfax County
   {
     bathrooms: 2,
     bedrooms: 2,
     price: 449900,
     rawAddress: '1312 Snowberry Ln Unit 5-204, Louisville, Colorado 80027',
     squareFootage: 1135,
-    county: 'Boulder County',
+    county: 'Colfax County',
     propertyType: 'Condo',
     addressLine1: '1312 Snowberry Ln',
     addressLine2: 'Unit 5-204',
-    city: 'Louisville',
+    city: 'Denver',
     state: 'CO',
     zipCode: '80027',
     formattedAddress: '1312 Snowberry Ln, Unit 5-204, Louisville, CO 80027',
@@ -80,9 +88,12 @@ export const apiResultsMin = [
     latitude: 39.991703,
     longitude: -105.126766
   },
+
   // price: price: 204999,
   // squareFootage: 913
   // Zip: 80112
+  // City: Louisville
+  // County: Boulder County
   {
     bathrooms: 1,
     bedrooms: 2,
@@ -122,7 +133,9 @@ export const apiResultsMinExpected = {
     costs: {
       mdn: 224.533406352683461,
       avg: 224.533406352683461
-    }
+    },
+    cities: ['Louisville'],
+    counties: ['Boulder County']
   },
   80027: {
     prices: {

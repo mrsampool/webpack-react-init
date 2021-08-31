@@ -35,3 +35,6 @@ function getMdn(value, listingsArr){
   let range = listingsArr.sort( (a,b) => a[value] > b[value] ? 1 : -1);
   return range[Math.floor(range.length / 2)][value];
 }
+function getCities(listingsArr){
+
+}

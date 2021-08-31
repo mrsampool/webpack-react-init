@@ -1,6 +1,6 @@
 import React from 'react';
 import { apiResults } from '../testData/apiResults';
-import { processListings } from '../utilities/processList';
+import { processListings } from '../utilities/dataUtilities';
 //import './App.css';
 import { Summary } from '../components/Summary/Summary';
 

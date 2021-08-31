@@ -4,93 +4,55 @@
 
 // React
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {act} from 'react-dom/test-utils';
+import {render} from '@testing-library/react';
 
 // Components
 import {Summary} from "./Summary";
 
-// Utilities
-import {expectElementsByClassName} from "../../utilities/testUtilities";
+//Utilities
+import {formatNum} from "../../utilities/dataUtilities";
 
-
-// Set Up / Tear Down
-let container;
-beforeEach(() => {
-  let testZip = {
-    code: '80027',
-    amount: 23,
-    prices: {
-      avg: 400000,
-      mdn: 450000
-    },
-    sizes: {
-      avg: 1200,
-      mdn: 1700
-    },
-    costs: {
-      avg: 333,
-      mdn: 375
-    }
+let testZip = {
+  code: '80027',
+  amount: 23,
+  prices: {
+    avg: 400000,
+    mdn: 450000
+  },
+  sizes: {
+    avg: 1200,
+    mdn: 1700
+  },
+  costs: {
+    avg: 333,
+    mdn: 375
   }
-  container = document.createElement("div");
-  document.body.appendChild(container);
-  act(() => {
-    ReactDOM.render(
-      <Summary zip={testZip}/>,
-      container
-    );
-  });
-});
-afterEach(() => {
-  if (container) {
-    /*
-    document.body.removeChild(container);
-    container = null;
-     */
-  }
-});
+};
 
 describe("Summary component", () => {
+
   it('renders without crashing', () => {});
 
-  // PRICE //
-  // Avg
-  it('displays an average price', () => {
-    expectElementsByClassName('avgPrice');
-  });
-  it('average price is correct', () => {});
-  // Mdn
-  it('displays a median price', () => {
-    expectElementsByClassName('mdnPrice');
-  });
-  it('median price is correct', () => {});
+  ['Price', 'Size', 'Cost',]
+  .forEach( category =>{
+    const {container} = render( <Summary zip={testZip}/> );
 
-  // SIZE //
-  // Avg
-  it('displays an average size', () => {
-    expectElementsByClassName('avgSize');
-  });
-  it('average size is correct', () => {
-  });
-  // Mdn
-  it('displays a median size', () => {
-    expectElementsByClassName('mdnSize');
-  });
-  it('median size is correct', () => {});
+    ['.avg', '.mdn'].forEach( value =>{
 
-  // COST //
-  // Avg
-  it('displays an average cost', () => {
-    expectElementsByClassName('avgCost');
+      let selector = value + category;
+      let element = container.querySelector(selector);
+
+      it(`displays ${selector}`, ()=>{
+        expect(element).toBeTruthy();
+      });
+
+      it(`${selector} contains correct number`, ()=>{
+        let actual = element.querySelector('.num').textContent;
+        let expectedNum = testZip[category.toLowerCase() + 's'][value.slice(1)];
+        let expectedFormatted = formatNum(expectedNum, category);
+
+        expect(actual).toEqual(expectedFormatted);
+      });
+    })
   });
-  it('average cost is correct', () => {});
-  //Mdn
-  it('displays a median cost', () => {
-    expectElementsByClassName('mdnCost');
-  });
-  it('median cost is correct', () => {});
 });
-
-
-

@@ -1,5 +1,5 @@
 // Functions
-import {processListings} from "./processList";
+import {processListings} from "./dataUtilities";
 
 // Test Data
 import {apiResultsMin} from "../testData/apiResults";
@@ -40,4 +40,16 @@ describe('Process Listings', ()=>{
       expect(zipObj.costs.mdn).toEqual(expected[zipObj.code].costs.mdn);
     })
   });
+  it('Zip objects have correct cities property', ()=>{
+    testZips.forEach( zipObj =>{
+      expected[zipObj.code].cities.forEach( city =>{
+        expect(zipObj.cities.includes(city)).toBe(true);
+      })
+    });
+  })
+  it('Zip objects have correct counties property', ()=>{
+    testZips.forEach( zipObj =>{
+      expect(zipObj.counties).toEqual(expected[zipObj.code].counties);
+    });
+  })
 })

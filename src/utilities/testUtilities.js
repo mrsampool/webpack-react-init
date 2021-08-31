@@ -1,6 +1,5 @@
-export function expectElementById(id){
-  let element = document.getElementById(id);
-  expect(element).toBeTruthy();
+export function expectElementBySelector(selector){
+  expect(this.querySelector(selector)).toBeTruthy();
 }
 export function expectElementsByClassName(className){
   let elements = document.getElementsByClassName(className);
