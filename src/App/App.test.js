@@ -4,88 +4,29 @@
 
 // React
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {act} from 'react-dom/test-utils';
+import {render} from '@testing-library/react';
 
 // Components
 import {App} from './App';
 
-// Utilities
-import {expectElementById} from "../utilities/testUtilities";
-
-// Set Up / Tear Down
-let container;
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
-  act(() => {
-    ReactDOM.render(
-      <App/>,
-      container
-    );
-  });
-});
-afterEach(() => {
-  if (container) {
-    /*
-    document.body.removeChild(container);
-    container = null;
-     */
-  }
-});
-
 describe("App", () => {
-  it('renders without crashing', () => {});
-  it('returns a UserInput component', () => {
-    expectElementById('userInput');
+
+  const {container} = render( <App/> );
+
+  it('Renders without crashing', ()=>{
+    //const {container} = render( <App/> );
+    let element = container.querySelector('#App');
+    expect(element).toBeTruthy();
   });
-  it('returns a Results component', () => {
-    expectElementById('results');
+
+  ['#UserInput', '#Results'].forEach( component =>{
+    //const {container} = render( <App/> );
+    let App = container.querySelector('#App');
+
+    it(`Renders ${component}`, ()=>{
+      let element = App.querySelector(component);
+      expect(element).toBeTruthy();
+    });
   });
+
 });
-
-
-
-describe("Overview component", () => {
-  it('renders without crashing', () => {});
-
-  // PRICE //
-  // Avg
-  it('displays an average price', () => {
-    expectElementById('avgPrice');
-  });
-  it('average price is correct', () => {});
-  // Mdn
-  it('displays a median price', () => {
-    expectElementById('mdnPrice');
-  });
-  it('median price is correct', () => {});
-
-  // SIZE //
-  // Avg
-  it('displays an average size', () => {
-    expectElementById('avgSize');
-  });
-  it('average size is correct', () => {
-  });
-  // Mdn
-  it('displays a median size', () => {
-    expectElementById('mdnSize');
-  });
-  it('median size is correct', () => {});
-
-  // COST //
-  // Avg
-  it('displays an average cost', () => {
-    expectElementById('avgCost');
-  });
-  it('average cost is correct', () => {});
-  //Mdn
-  it('displays a median cost', () => {
-    expectElementById('mdnCost');
-  });
-  it('median cost is correct', () => {});
-});
-
-
-
