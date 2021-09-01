@@ -1,30 +1,27 @@
-import {Zip} from './ZipModel';
+import {Zip} from '../models/Zip';
+import {ZipCollector} from '../models/ZipCollector';
 
 export function processListings(rawListings){
 
-  let listingZips = {};
+  let zipCollectors = {};
   let processedZips = [];
 
   rawListings.forEach( listing => {
-    if (!listingZips[listing.zipCode]){
-      listingZips[listing.zipCode] = [listing];
+    if (!zipCollectors[listing.zipCode]){
+      zipCollectors[listing.zipCode] = new ZipCollector(listing);
     } else {
-      listingZips[listing.zipCode].push(listing);
+      zipCollectors[listing.zipCode].addListing(listing);
     }
   })
-
-  Object.keys(listingZips).forEach( zipcode => {
-
-    processedZips.push( new Zip(listingZips[zipcode]) );
+  Object.keys(zipCollectors).forEach( zipcode => {
+    processedZips.push( new Zip(zipCollectors[zipcode]) );
   })
-
   return processedZips;
 }
 
 export function formatHead(type, header){
   return `${type.charAt(0).toUpperCase() + type.slice(1)} ${header}`;
 }
-
 export function formatNum(num, header){
   let prefix = function(){
     if ( header === 'Price' || header === 'Cost'){
