@@ -10,7 +10,7 @@ import {render} from '@testing-library/react';
 import {Summary} from "./Summary";
 
 //Utilities
-import {formatNum} from "../../utilities/dataUtilities";
+import {formatNum} from './Summary';
 
 let testZip = {
   code: '80027',
