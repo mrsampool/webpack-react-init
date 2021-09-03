@@ -7,11 +7,11 @@ import React from 'react';
 // TODO: Implement Overview capability
 
 export const Summary = (props) =>{
-  let {code, amount, prices, sizes, costs} = props.zip;
+  let {collection, code, amount, prices, sizes, costs} = props.zip || props.collection;
   return(
     <div className='Summary d-flex flex-column justify-content-around'>
       <div className='d-flex justify-content-between'>
-        <span className='codeHeader'>{code}</span>
+        <span className='codeHeader'>{code || 'Overview'}</span>
         <span> {amount} Listing{amount > 1 ? 's' : ''}</span>
       </div>
       <SummaryRow header='Price' nums={prices}/>

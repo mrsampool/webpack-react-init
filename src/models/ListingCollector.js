@@ -1,4 +1,4 @@
-export class ZipCollector{
+export class ListingCollector {
   constructor(listing){
     this.listings = [listing];
     this.towns = new Set();
