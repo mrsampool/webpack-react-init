@@ -8,9 +8,10 @@ export class ZipCollection{
     this.total = rawListings.length;
 
     let zipData = buildZips(rawListings);
-    this.zips = zipData[0];
-    this.zipcodeList = zipData[1];
-
-    this.numbers = calcNumbers(this, this.listings);
+    this.zips = zipData.zipObjs;
+    this.zipcodeList = zipData.zipcodeList;
+    this.towns = zipData.towns;
+    this.counties = zipData.counties;
+    this.numbers = calcNumbers(zipData.numbers);
   }
 }

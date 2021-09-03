@@ -2,33 +2,63 @@ import {ListingCollector} from "./ListingCollector";
 import {Zip} from "./Zip";
 
 export function buildZips(listings){
-  let zipCollectors = {};
+  let listingCollectors = {};
   let zipObjs = [];
   let zipcodeList = [];
+  let towns = new Set();
+  let counties = new Set();
+  let numbers = {
+    prices: [],
+    sizes: [],
+    costs: [],
+  }
 
   listings.forEach( listing => {
-    if (!zipCollectors[listing.zipCode]){
-      zipCollectors[listing.zipCode] = new ListingCollector(listing);
+
+    listing.cost = listing.price / listing.squareFootage;
+    numbers.prices.push(listing.price);
+    numbers.sizes.push(listing.squareFootage);
+    numbers.costs.push(listing.cost);
+
+    if (!listingCollectors[listing.zipCode]){
+      listingCollectors[listing.zipCode] = new ListingCollector(listing);
       zipcodeList.push(listing.zipCode);
     } else {
-      zipCollectors[listing.zipCode].addListing(listing);
+      listingCollectors[listing.zipCode].addListing(listing);
     }
   })
-  Object.keys(zipCollectors).forEach( zipcode => {
-    zipObjs.push( new Zip(zipCollectors[zipcode]) );
+  Object.keys(listingCollectors).forEach( zipcode => {
+    let listingCollector = listingCollectors[zipcode];
+    listingCollector.towns.forEach( town =>{
+      towns.add(town);
+    });
+    listingCollector.counties.forEach( county =>{
+      counties.add(county);
+    });
+    zipObjs.push( new Zip(listingCollector) );
   })
-  return [zipObjs, zipcodeList];
+  return {
+    zipObjs,
+    zipcodeList,
+    towns,
+    counties,
+    numbers,
+  };
 }
 
-export function calcNumbers(obj, listings){
+export function calcNumbers(listingNumbers){
   let numbers = {};
+  let listingPrices = listingNumbers.price;
+  let listingSizes = listingNumbers.size;
+  let listingCosts = listingNumbers.cost;
+
   numbers.prices = {
-    avg: getAvg('price', listings),
-    mdn: getMdn('price', listings)
+    avg: getAvg('price', listingPrices),
+    mdn: getMdn('price', listingPrices)
   }
   numbers.sizes = {
-    avg: getAvg('squareFootage', listings),
-    mdn: getMdn('squareFootage', listings)
+    avg: getAvg('squareFootage', listingSizes),
+    mdn: getMdn('squareFootage', listingSizes)
   }
   numbers.costs = {
     avg: numbers.prices.avg / numbers.sizes.avg,
