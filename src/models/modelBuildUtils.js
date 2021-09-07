@@ -20,23 +20,20 @@ export function buildZips(listings){
     numbers.sizes.push(listing.squareFootage);
     numbers.costs.push(listing.cost);
 
+    towns.add(listing.city);
+    counties.add(listing.county);
+
     if (!listingCollectors[listing.zipCode]){
       listingCollectors[listing.zipCode] = new ListingCollector(listing);
       zipcodeList.push(listing.zipCode);
     } else {
       listingCollectors[listing.zipCode].addListing(listing);
     }
-  })
-  Object.keys(listingCollectors).forEach( zipcode => {
-    let listingCollector = listingCollectors[zipcode];
-    listingCollector.towns.forEach( town =>{
-      towns.add(town);
+
+    Object.keys(listingCollectors).forEach( zipcode => {
+      zipObjs.push( new Zip(listingCollectors[zipcode]) );
     });
-    listingCollector.counties.forEach( county =>{
-      counties.add(county);
-    });
-    zipObjs.push( new Zip(listingCollector) );
-  })
+  });
   return {
     zipObjs,
     zipcodeList,
@@ -48,36 +45,47 @@ export function buildZips(listings){
 
 export function calcNumbers(listingNumbers){
   let numbers = {};
-  let listingPrices = listingNumbers.price;
-  let listingSizes = listingNumbers.size;
-  let listingCosts = listingNumbers.cost;
+  let listingPrices = listingNumbers.prices;
+  let listingSizes = listingNumbers.sizes;
+  let listingCosts = listingNumbers.costs;
 
   numbers.prices = {
-    avg: getAvg('price', listingPrices),
-    mdn: getMdn('price', listingPrices)
+    avg: getAvg(listingPrices),
+    mdn: getMdn(listingPrices)
   }
   numbers.sizes = {
-    avg: getAvg('squareFootage', listingSizes),
-    mdn: getMdn('squareFootage', listingSizes)
+    avg: getAvg(listingSizes),
+    mdn: getMdn(listingSizes)
   }
   numbers.costs = {
-    avg: numbers.prices.avg / numbers.sizes.avg,
-    mdn: numbers.prices.mdn / numbers.sizes.mdn,
+    avg: getAvg(listingCosts),
+    mdn: getMdn(listingCosts),
   }
   return numbers;
 }
-export function getAvg(value, listingsArr){
+export function getAvg(listingsArr){
   let listingCount = 0;
   let listingSum = 0;
   listingsArr.forEach( listing => {
-    if (typeof listing[value] === 'number'){
-      listingSum += listing[value];
+    if (typeof listing === 'number'){
+      listingSum += listing;
       listingCount ++;
     }
   });
-  return (listingSum / listingCount);
+  return listingSum / listingCount;
 }
-export function getMdn(value, listingsArr){
-  let range = listingsArr.sort( (a,b) => a[value] > b[value] ? 1 : -1);
-  return range[Math.floor(range.length / 2)][value];
+export function getMdn(listingsArr){
+  let range = listingsArr.sort( (a,b) =>{
+    return a > b ? 1 : -1;
+  });
+  if ( range.length % 2 ){
+    let middleIndex = Math.floor(range.length / 2);
+    return range[middleIndex];
+  }
+  let middleIndex = range.length - 2;
+  let middles = [
+    range[middleIndex - 1],
+    range[range.length / 2],
+  ];
+  return getAvg(middles);
 }
