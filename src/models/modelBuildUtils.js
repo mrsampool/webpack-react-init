@@ -30,9 +30,9 @@ export function buildZips(listings){
       listingCollectors[listing.zipCode].addListing(listing);
     }
 
-    Object.keys(listingCollectors).forEach( zipcode => {
-      zipObjs.push( new Zip(listingCollectors[zipcode]) );
-    });
+  });
+  Object.keys(listingCollectors).forEach( zipcode => {
+    zipObjs.push( new Zip(listingCollectors[zipcode]) );
   });
   return {
     zipObjs,

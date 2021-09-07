@@ -170,7 +170,7 @@ export const apiResultsMin = {
       },
       costs: {
         mdn: 396.387665198237885,
-        avg: 340.667361835245
+        avg: 352.401315565866147
       },
       towns: ['Louisville','Boulder','Denver'],
       counties: ['Boulder County', 'Colfax County']
